@@ -1,4 +1,8 @@
-﻿using UnityEngine;
+﻿// ToggleLight.cs
+// Turns the light
+
+
+using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
 
@@ -27,4 +31,12 @@ public class Flashlight : MonoBehaviour {
 			light.enabled = true;
 		}
 	}
+	public void setLightOn(){
+		lightOn = true;
+	}
+
+	public bool isLightOn(){
+		return lightOn;
+	}
+	
 }
