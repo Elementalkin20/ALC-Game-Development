@@ -8,7 +8,6 @@ public class GhostAI : MonoBehaviour {
 	public int damage;
 
 
-	
 	void OnTriggerStay(Collider other)
 	{
 		if(other.gameObject.name == "Player"){
@@ -42,6 +41,4 @@ public class GhostAI : MonoBehaviour {
 		transform.LookAt(target);
 		transform.Translate(Vector3.forward*moveSpeed*Time.deltaTime);
 	}
-
-
 }

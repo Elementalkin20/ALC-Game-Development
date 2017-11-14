@@ -15,7 +15,7 @@ public class GhostStun : MonoBehaviour {
 		flash = gameObject.GetComponentInChildren<Light>().GetComponentInChildren<Flashlight>();
 		//bool test = gameObject.GetComponentInChildren<Light>().Flashlight.isLightOn();
 		//print("Test;"+test);
-		print("Obj:"+flash);
+		print("Obj:" + flash);
 		flash.setLightOn();
 		print("Start" + flash.isLightOn ());
 
