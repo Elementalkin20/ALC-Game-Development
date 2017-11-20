@@ -11,13 +11,13 @@ public class GhostStun : MonoBehaviour {
 	// Use this for initialization
 
 	void Start () {
-		//print ("Obj:" +gameObject.GetComponentInChildren<Light>().GetComponentInChildren<Flashlight>());
+		//print ("Obj:" +gameObject.GetComponentInChildren<Light>().GetComponent<Flashlight>());
 		flash = gameObject.GetComponentInChildren<Light>().GetComponentInChildren<Flashlight>();
 		//bool test = gameObject.GetComponentInChildren<Light>().Flashlight.isLightOn();
 		//print("Test;"+test);
 		print("Obj:" + flash);
 		flash.setLightOn();
-		print("Start" + flash.isLightOn ());
+		print ("Start" + flash.isLightOn ());
 
 	}
 	
@@ -33,15 +33,16 @@ public class GhostStun : MonoBehaviour {
 			print("Ghost is Stunned!");
 			// other.GetComponent<Rigidbody>().velocity = Vector3.zero;
 			// other.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+
 			other.GetComponent<GhostAI>().moveSpeed = 0f;
-			StartCoroutine(Wait(5));
+			StartCoroutine(Wait(5, other));
 			// StopCoroutine(Wait(5));
 		}
 	}
 
-	IEnumerator Wait(float time){
+	IEnumerator Wait(float time, Collider other){
 		yield return new WaitForSeconds(time);
-		ghost.GetComponent<GhostAI>().moveSpeed = 5f;
-		print ("Ghost is unstunned");
+		ghost.gameObject.GetComponent<GhostAI>().moveSpeed = 5f;
+		print("Ghost is unstunned");
 	}
 }
