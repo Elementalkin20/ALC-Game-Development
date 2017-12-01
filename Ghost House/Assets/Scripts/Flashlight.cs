@@ -54,7 +54,7 @@ public class Flashlight : MonoBehaviour {
 
 		//Drain Battery Life
 		if(currentPower > 0){
-			StartCoroutine(BatteryDrain(batDrainDelay.batDrainAmt));
+			StartCoroutine(BatteryDrain(batDrainDelay,batDrainAmt));
 		}
 	}
 
