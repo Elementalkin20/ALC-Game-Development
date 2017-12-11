@@ -1,21 +1,28 @@
-﻿using System.Collections;
+﻿//ToggleLight.cs
+//Turn the light component of this object on/off when the user presses and releases the 'L' key.
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Flashlight : MonoBehaviour {
 
+
+	//Flashlight on/off
 	public bool lightOn = true;
 	//Flashlight Power capacity
 	public int maxPower = 4;
 	//Usable Flashlight Power
 	public int currentPower;
-
+	//Flashlight Drain Amount;
 	public int batDrainAmt;
-
+	//Flashlight Drain Delay;
 	public float batDrainDelay;
-
+	//Stores light object
 	Light light;
+	//Battery drain on/off
+	bool draining = false;
 
 	// Gets Battery UI Text
 	public Text batteryText;
