@@ -23,7 +23,8 @@ public class Flashlight : MonoBehaviour {
 	Light light;
 	//Battery drain on/off
 	bool draining = false;
-
+	//Count integer
+	long count = 0;
 	// Gets Battery UI Text
 	public Text batteryText;
 
@@ -50,7 +51,7 @@ public class Flashlight : MonoBehaviour {
 
 		}
 
-		else if (Input.GetKeyUp (KeyCode.F) && !lightOn){
+		else if (Input.GetKeyUp (KeyCode.F) && !lightOn && currentPower > 0){
 			print("Light On");
 			lightOn = true;
 			light.enabled = true;
@@ -61,28 +62,42 @@ public class Flashlight : MonoBehaviour {
 
 		//Drain Battery Life
 		if(currentPower > 0){
+			if(!draining){
 			StartCoroutine(BatteryDrain(batDrainDelay,batDrainAmt));
+			}
+			else if(currentPower <= 0){
+				lightOn = false;
+				light.enabled = false;
+			}
 		}
 	}
-
+	//Turns light on when called
 	public void setLightOn(){
 		lightOn = true;
 	}
-
+	//Returns if light is on
 	public bool isLightOn(){
 		return lightOn;
 
 	}
-
+	//Drain Battery Life
 	IEnumerator BatteryDrain(float delay, int amount){
-		yield return new WaitForSeconds(delay);
-		currentPower -= amount;
+		if(light){
+			draining = true;
+			yield return new WaitForSeconds(delay);
+			print(currentPower)
+			currentPower -= amount;
+		}
+		
+		
 		if(currentPower <= 0){
 			currentPower = 0;
 			print("Battery is dead");
 			light.enabled = false;
 
 		}
+
+		draining = false;
 	}
 	
 }
