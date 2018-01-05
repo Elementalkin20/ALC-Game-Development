@@ -2,47 +2,65 @@
 using System.Collections;
 
 public class BatterySpawn : MonoBehaviour {
-	
+
 	public Rigidbody battery;
 
 	public Transform spawnPoint;
 
 	public float spawnTime;
 
-	public bool BatSpawned;
+	public bool batSpawned;
+	private bool spawning = false;
 
 
 	// Use this for initialization
 	void Start () {
-		BatSpawned = false;
+		batSpawned = false;
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
-		if(BatSpawned == false){
-			StartCoroutine(SpawnBat(spawnTime, battery));
+		if(batSpawned == false){
+			if(!spawning){
+				spawning = !spawning;
+				StartCoroutine(SpawnBat(spawnTime, battery));
+				print("Spawn Box Empty");
+			}
 		}
-		else{
-			SropCoroutine(SpawnBat(spawnTime, battery));
-		}
+		else if(batSpawned == true){
 
+			print("Battery has spawned!");
+		}
 	}
 
 	void OnTriggerEnter(Collider other){
+
 		if(other.gameObject.tag == "Battery"){
-			BatSpawned = true;
+			print("Battery is in the trigger");
+			batSpawned = true;			
 		}
-		else{
-			BatSpawned = false;
+
+	}
+
+	void OnTriggerExit(Collider other){
+		if(other.gameObject.tag == "Battery"){
+			print("Spawner is Empty");
+			batSpawned = false;			
 		}
 	}
 
 	IEnumerator SpawnBat(float time, Rigidbody bat){
 		yield return new WaitForSeconds(time);
-		instantiate(bat, spawnPoint.position, spawnPoint.rotation);
-		BatSpawned = true;
+		Instantiate(bat, spawnPoint.position, spawnPoint.rotation);
+		batSpawned = true;
+		spawning = !spawning;
+
 
 	}
 
+	public void BatteryPickup(){
 
+		print("Spawner is Empty");
+		batSpawned = false;			
+	}
 }

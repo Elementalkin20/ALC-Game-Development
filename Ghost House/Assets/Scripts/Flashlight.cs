@@ -85,7 +85,7 @@ public class Flashlight : MonoBehaviour {
 		if(light){
 			draining = true;
 			yield return new WaitForSeconds(delay);
-			print(currentPower)
+			print (currentPower);
 			currentPower -= amount;
 		}
 		
